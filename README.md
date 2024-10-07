@@ -1,7 +1,7 @@
 
 # LVS - Tram
 
-This project implements a tram system using the **LVS (Lua Vehicle System)** framework for Garry's Mod, providing a realistic and interactive transportation system for your game. 
+This project implements a tram system using the **LVS (Luna's Vehicle System)** framework for Garry's Mod, providing a more modern, realistic and interactive transportation system for the game. 
 
 ## Table of Contents
 - [About the Project](#about-the-project)
@@ -16,7 +16,7 @@ This tram project leverages the LVS framework to create a fully functional tram 
 ## Credits
 
 - **Luna** for developing the LVS framework.
-- **Meowsandstuff** for contributing on this project
+- **meowsandstuff** for contributing on this project
 - **Preach** for contributing on this project
 
 ## License
