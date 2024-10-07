@@ -14,14 +14,33 @@ ENT.WaterLevelDestroyAI = 2 -- at this water level (on collision) the AI will se
 -- use this instead of ENT:Initialize()
 function ENT:OnSpawn( PObj )
 	--[[ basics ]]
-	self:AddDriverSeat( Vector(47,63,19), Angle(0,90,0) ) -- self:AddDriverSeat( Position,  Angle ) -- add a driver seat (max 1)
+	self:AddDriverSeat( Vector(-47,94,20), Angle(0,-90,0) ) -- self:AddDriverSeat( Position,  Angle ) -- add a driver seat (max 1)
 	-- Pod.ExitPos = Vector(0,0,100) -- change exit position
 	-- Pod.HidePlayer = true -- should the player in this pod be invisible?
 
-	local Pod = self:AddPassengerSeat( Vector(47,44.5,19), Angle(0,90,0) ) -- add a passenger seat (no limit)
-	local Pod = self:AddPassengerSeat( Vector(47,24,19), Angle(0,90,0) )
-	local Pod = self:AddPassengerSeat( Vector(47,0,19), Angle(0,90,0) )
-	local Pod = self:AddPassengerSeat( Vector(47,-18,19), Angle(0,90,0) )
+	local Pod = self:AddPassengerSeat( Vector(-47,73.5,20), Angle(0,-90,0) ) -- add a passenger seat (no limit)
+	local Pod = self:AddPassengerSeat( Vector(-47,54.5,20), Angle(0,-90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(-47,34.5,20), Angle(0,-90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(-47,15.5,20), Angle(0,-90,0) )	
+	
+	local Pod = self:AddPassengerSeat( Vector(47,63.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,44.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,24.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,4.5,20), Angle(0,90,0) )	
+	
+	local Pod = self:AddPassengerSeat( Vector(47,-14.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,-34.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,-54.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,-74.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,-94.5,20), Angle(0,90,0) )	
+	local Pod = self:AddPassengerSeat( Vector(47,-113.5,20), Angle(0,90,0) )	
+	
+	local Pod = self:AddPassengerSeat( Vector(-31,-58.5,20), Angle(0,0,0) )	
+	local Pod = self:AddPassengerSeat( Vector(-49,-58.5,20), Angle(0,0,0) )	
+	local Pod = self:AddPassengerSeat( Vector(-49,-3.5,20), Angle(0,180,0) )	
+	local Pod = self:AddPassengerSeat( Vector(-31,-3.5,20), Angle(0,180,0) )	
+
+
 
 	-- Pod.ExitPos = Vector(0,0,100) -- change exit position
 	-- Pod.HidePlayer = true -- should the player in this pod be invisible?
