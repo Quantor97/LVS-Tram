@@ -11,18 +11,125 @@ ENT.WaterLevelDestroyAI = 2 -- at this water level (on collision) the AI will se
 --ENT.PivotSteerEnable = false -- uncomment and set to "true" to enable pivot steering (tank steering on the spot)
 --ENT.PivotSteerWheelRPM = 40 -- how fast the wheels rotate during pivot steer
 
+	--self:AddDriverSeat( Vector(47,63,19), Angle(0,90,0) ) -- self:AddDriverSeat( Position,  Angle ) -- add a driver seat (max 1)
+ENT.PassengerSeatsData = {
+	{
+		maxSeats = 10,
+		nextSeatDirection = Vector(0, 1),
+		
+		height = 19,
+		seatPos = Vector(34.451111, 72.680794, 0),
+		seatSize = -Vector(-17.579987, 18.419998),
+		seatSizeOffset = Vector(2, 0, 0),
+
+		seatAngle = Angle(0, 90, 0),
+
+		gapInterval = 2,
+		gapStartOffset = false,
+		gapSize = -2.807975
+	},
+	{
+		maxSeats = 6,
+		nextSeatDirection = Vector(0, -1, 0),
+		
+		height = 19,
+		seatPos = Vector(-34.224571, 24.603601),
+		seatSize = -Vector(-17.579987, 18.419998),
+		seatSizeOffset = Vector(-17, 0, 0),
+
+		seatAngle = Angle(0, -90, 0),
+
+		gapInterval = 2,
+		gapStartOffset = false,
+		gapSize = -2.807975
+	},
+	{
+		maxSeats = 2,
+		nextSeatDirection = Vector(1, 0, 0),
+		
+		height = 19,
+		seatPos = Vector(-21.294741, -48.676205),
+		seatSize = -Vector(17.579987, 18.419998),
+		seatSizeOffset = Vector(0, 0, 0),
+
+		seatAngle = Angle(0, 0, 0),
+
+		gapInterval = -1,
+		gapStartOffset = true,
+		gapSize = -2.807975
+	},
+	{
+		maxSeats = 2,
+		nextSeatDirection = Vector(1, 0, 0),
+		
+		height = 19,
+		seatPos = Vector(-21.294741, -15.363510),
+		seatSize = -Vector(17.579987, 18.419998),
+		seatSizeOffset = Vector(0, 17, 0),
+
+		seatAngle = Angle(0, 180, 0),
+
+		gapInterval = -1,
+		gapStartOffset = false,
+		gapSize = -2.807975
+	},
+}
+
+function ENT:AddPassengerSeats()
+	local seatsData = self.PassengerSeatsData
+
+	if not seatsData or #seatsData == 0 then 
+		return 
+	end
+
+	for i=1, #seatsData do
+		local data = seatsData[i]
+
+		local maxIt = data.maxSeats
+		local seatAng = data.seatAngle
+		local seatDir = data.nextSeatDirection
+		local gapInterval = data.gapInterval or -1
+		local gapSize = data.gapSize or 0
+		local gapStartOffset = data.gapStartOffset or false
+		gapSize = gapSize*seatDir
+
+		local seatPos = data.seatPos
+		local sizeOffset = data.seatSizeOffset or Vector()
+		local seatSize = data.seatSize
+		local center = seatPos + seatSize*Vector(.5,.5,0) + Vector(0,0,data.height)
+
+		local lastSeatPos = center + sizeOffset
+		local nextSeatPos = seatSize*seatDir
+
+		for j=1, maxIt do
+			local gapIt = gapStartOffset and j+1 or j
+
+			local gap = gapInterval > 0 and j != 1 and gapIt % gapInterval == 0 and
+				gapSize or Vector()
+
+			if i == 1 and j == 1 then
+				self:AddDriverSeat( lastSeatPos, seatAng )
+			else
+				self:AddPassengerSeat( lastSeatPos, seatAng )
+			end
+
+			lastSeatPos = lastSeatPos + gap + nextSeatPos
+
+			if j == 1 and gapStartOffset then
+				lastSeatPos = lastSeatPos + gapSize
+			end			
+		end
+
+	end
+
+end
 -- use this instead of ENT:Initialize()
 function ENT:OnSpawn( PObj )
 	--[[ basics ]]
-	self:AddDriverSeat( Vector(47,63,19), Angle(0,90,0) ) -- self:AddDriverSeat( Position,  Angle ) -- add a driver seat (max 1)
 	-- Pod.ExitPos = Vector(0,0,100) -- change exit position
 	-- Pod.HidePlayer = true -- should the player in this pod be invisible?
 
-	local Pod = self:AddPassengerSeat( Vector(47,44.5,19), Angle(0,90,0) ) -- add a passenger seat (no limit)
-	local Pod = self:AddPassengerSeat( Vector(47,24,19), Angle(0,90,0) )
-	local Pod = self:AddPassengerSeat( Vector(47,0,19), Angle(0,90,0) )
-	local Pod = self:AddPassengerSeat( Vector(47,-18,19), Angle(0,90,0) )
-
+	self:AddPassengerSeats()
 	-- Pod.ExitPos = Vector(0,0,100) -- change exit position
 	-- Pod.HidePlayer = true -- should the player in this pod be invisible?
 
