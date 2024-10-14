@@ -1,12 +1,10 @@
-
 ENT.Base = "lvs_base"
-
 ENT.PrintName = "Automated Train"
-ENT.Author = "meowsandstuff"
-ENT.Information = ""
+ENT.Author = "meowsandstuff & Preach"
 ENT.Category = "[LVS] - Black Mesa Transit System"
+ENT.Information = ""
 
-ENT.Spawnable			= true -- set to "true" to make it spawnable
+ENT.Spawnable			= true
 ENT.AdminSpawnable		= false
 
 ENT.SpawnNormalOffset = 20 -- spawn normal offset, raise to prevent spawning into the ground

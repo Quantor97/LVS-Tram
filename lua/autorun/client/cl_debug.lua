@@ -110,7 +110,7 @@ concommand.Add("lvs_tram_force_seat", function(ply, cmd, args)
         return
     end
 
-    net.Start("lvs_tram_debug")
+    net.Start("lvs_tram_force_seats")
         net.WriteEntity(vehicle)
     net.SendToServer()
 end)
